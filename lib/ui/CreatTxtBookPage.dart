@@ -285,7 +285,7 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
         bgm[currentBGMIndex]?["path"].toString() ?? "",
         voice[currentVoiceIndex]?["id"].toString() ?? "",
         bgm[currentBGMIndex]?["id"].toString() ?? "");
-    if (post.isSuccess()) {
+    if (post?.isSuccess() ?? false) {
       SmartDialog.dismiss();
     } else {
       "创建失败".bbToast();

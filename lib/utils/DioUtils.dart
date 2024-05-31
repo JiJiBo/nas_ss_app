@@ -78,7 +78,7 @@ Future<Response<Map>> add_novel_by_txt(
   return response;
 }
 
-Future<Response<Map>> add_novel_by_txtByBytes(
+Future<Response<Map>?> add_novel_by_txtByBytes(
     String name,
     Uint8List? fileData,
     String voice,
@@ -104,15 +104,18 @@ Future<Response<Map>> add_novel_by_txtByBytes(
   });
 
   print(parameters);
-  Response<Map> response = await dio.post(
-    path,
-    data: formData, // 使用FormData作为请求体
-    options: Options(headers: {
-      'Content-Type': 'multipart/form-data', // 这一行其实可以不写，Dio会自动处理
-      "Authorization": "token".getString(defaultValue: "")
-    }),
-  );
-  return response;
+  try {
+    Response<Map> response = await dio.post(
+      path,
+      data: formData, // 使用FormData作为请求体
+      options: Options(
+          headers: {"Authorization": "token".getString(defaultValue: "")}),
+    );
+    return response;
+  } catch (e) {
+    print(e);
+  }
+  return null;
 }
 
 Future<Response<Map>> login(String name, password) async {
