@@ -2,7 +2,7 @@
 
 # 注意
 
-- 这只是前端，后端请参考 https://github.com/JiJiBo/nas_ss.git
+- 这只是前端，后端请参考 python django 实现的 https://github.com/JiJiBo/nas_ss.git
 - 自行上传bgm文件，加在数据库里
 
 # 介绍
