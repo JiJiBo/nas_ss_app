@@ -270,6 +270,10 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
   var bgm = {};
   var bookid = 0;
 
+  bool get isLink {
+    return bookinfo["type"] ?? "" == "link";
+  }
+
   Future<void> initForFirst() async {
     await Duration.zero.delayed();
     bookid = context.getTheArg as int;
@@ -280,7 +284,7 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
     SmartDialog.showLoading();
     var post = await get_novel(bookid);
     if (post.isSuccess()) {
-      bookinfo = post.getData() ;
+      bookinfo = post.getData();
     } else {
       "获取失败".bbToast();
       setState(() {});
@@ -289,13 +293,13 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
     print(bookinfo);
     var v = await get_a_voice(bookinfo["voice_id"]);
     if (v.isSuccess()) {
-      voice = v.getData() ;
+      voice = v.getData();
     } else {
       "get_a_voice失败".bbToast();
     }
     var b = await get_a_bgm(bookinfo["background_music_id"]);
     if (b.isSuccess()) {
-      bgm = b.getData() ;
+      bgm = b.getData();
     } else {
       "get_a_bgm失败".bbToast();
     }
