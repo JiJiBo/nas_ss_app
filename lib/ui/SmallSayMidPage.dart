@@ -289,13 +289,13 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
     print(bookinfo);
     var v = await get_a_voice(bookinfo["voice_id"]);
     if (v.isSuccess()) {
-      voice = v.getData()["results"];
+      voice = v.getData() ;
     } else {
       "get_a_voice失败".bbToast();
     }
     var b = await get_a_bgm(bookinfo["background_music_id"]);
     if (b.isSuccess()) {
-      bgm = b.getData()["results"];
+      bgm = b.getData() ;
     } else {
       "get_a_bgm失败".bbToast();
     }
