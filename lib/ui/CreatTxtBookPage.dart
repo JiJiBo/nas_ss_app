@@ -133,17 +133,7 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
                 ),
               ),
               Expanded(child: Container()),
-              IconButton(
-                  onPressed: () async {
-                    final Uri _url = Uri.parse('https://www.qimao.com/shuku/');
-                    if (!await launchUrl(_url)) {
-                      'Could not launch $_url'.bbToast();
-                    }
-                  },
-                  icon: Icon(
-                    Icons.web_rounded,
-                    color: Color(0xFF037AFF),
-                  )),
+
               Container(
                   child: TextButton(
                       style: noPaddingBS,

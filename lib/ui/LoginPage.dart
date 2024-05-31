@@ -23,9 +23,9 @@ class _LoginPage extends State<LoginPage> {
     String password = _passwordController.text;
     var post = await login(username, password);
     if (post.isSuccess()) {
-      post.getData()["data"]["id"].toString().save("id");
-      post.getData()["data"]["name"].toString().save("userName");
-      post.getData()["data"]["logo"].toString().save("logo");
+      post.getData()["token"].toString().save("token");
+      "token".getString(defaultValue: "").bbLogD(tag: "token");
+      username.toString().save("userName");
       Navigator.pop(context);
       routeStore.home_ui_route.push(context);
     } else {

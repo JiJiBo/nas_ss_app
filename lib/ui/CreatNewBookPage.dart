@@ -257,12 +257,15 @@ class _CreatNewBookPage extends State<CreatNewBookPage> {
     var v = await get_all_voice();
     if (v.isSuccess()) {
       voice.addAll(v.getData()["results"]);
-    } else {}
+    } else {
+
+    }
     var b = await get_all_bgm();
     if (b.isSuccess()) {
       bgm.addAll(b.getData()["results"]);
     } else {}
-
+    print(voice);
+    print(bgm);
     setState(() {});
   }
 }

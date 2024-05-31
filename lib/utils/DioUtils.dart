@@ -70,6 +70,7 @@ Future<Response<Map>> add_novel_by_txt(
     options: Options(headers: {
       'Content-Type': 'multipart/form-data',
       // 更改Content-Type为multipart/form-data
+      "Authorization": "token".getString(defaultValue: "")
     }),
   );
   return response;
@@ -104,6 +105,7 @@ Future<Response<Map>> get_all_voice() async {
 
   Response<Map> query = await dio.get(
     path,
+    options: getOptions(),
   );
   return query;
 }
@@ -113,6 +115,7 @@ Future<Response<Map>> get_all_bgm() async {
 
   Response<Map> query = await dio.get(
     path,
+    options: getOptions(),
   );
   return query;
 }
@@ -124,7 +127,11 @@ Future<Response<Map>> get_all_novels(page) async {
     "user_id": "id".getString(defaultValue: "-1"),
   };
   print(path);
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -135,7 +142,11 @@ Future<Response<Map>> get_filtered_books(page, book_id, get_step) async {
     "get_step": get_step,
     "book_id": book_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -144,7 +155,11 @@ Future<Response<Map>> get_novel(novel_id) async {
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -153,7 +168,11 @@ Future<Response<Map>> update_novel(novel_id) async {
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -162,7 +181,11 @@ Future<Response<Map>> delete_novel(novel_id) async {
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -171,7 +194,11 @@ Future<Response<Map>> stop_novel(novel_id) async {
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -180,7 +207,11 @@ Future<Response<Map>> clear_novel(novel_id) async {
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -189,7 +220,11 @@ Future<Response<Map>> get_a_bgm(bgm_id) async {
   Map<String, dynamic> parameters = {
     "bgm_id": bgm_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
@@ -198,8 +233,13 @@ Future<Response<Map>> get_a_voice(voice_id) async {
   Map<String, dynamic> parameters = {
     "voice_id": voice_id,
   };
-  Response<Map> query = await dio.get(path, queryParameters: parameters);
+  Response<Map> query = await dio.get(
+    path,
+    queryParameters: parameters,
+    options: getOptions(),
+  );
   return query;
 }
 
-Options getOptions() => Options( );
+Options getOptions() =>
+    Options(headers: {"Authorization": "token".getString(defaultValue: "")});

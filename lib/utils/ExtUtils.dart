@@ -43,10 +43,12 @@ extension BuildContextExt on BuildContext {
 
 extension ResponseExt on Response<Map> {
   bool isSuccess() {
+    print(this.data);
     return this.data!["code"] == 200;
   }
 
   Map getData() {
-    return this.data!;
+    print(this.data);
+    return this.data!["data"];
   }
 }
