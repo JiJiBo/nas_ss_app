@@ -100,7 +100,7 @@ Future<Response<Map>?> add_novel_by_txtByBytes(
   FormData formData = FormData.fromMap({
     ...parameters,
     // 文件参数, 假设字段名为'file', 你可以根据实际情况调整
-    "file": MultipartFile.fromBytes(fileData!, filename: name + ".txt")
+    "novel_file": MultipartFile.fromBytes(fileData!, filename: name + ".txt")
   });
 
   print(parameters);
