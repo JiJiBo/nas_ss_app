@@ -96,17 +96,18 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
                       title: Text(fileName ?? "文件"),
                       subtitle: Text(path),
                       onTap: () async {
-                        final result = await FilePicker.platform.pickFiles( );
+                        final result = await FilePicker.platform
+                            .pickFiles(allowCompression: false);
 
                         if (result != null) {
                           if (kIsWeb) {
                             if (result != null && result.files.isNotEmpty) {
                               fileBytes = result.files.first.bytes;
                               fileName = result.files.first.name;
-                            } else {
-                              path = result?.files.single.path ?? "";
-                              fileName = result?.files.first.name;
                             }
+                          } else {
+                            path = result?.files.single.path ?? "";
+                            fileName = result?.files.first.name;
                           }
                         } else {}
                         setState(() {});
