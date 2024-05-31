@@ -254,7 +254,7 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
       SmartDialog.showLoading();
       try {
         var post = await add_novel_by_txt(
-            "from app",
+            fileName ?? "no name",
             path,
             voice[currentVoiceIndex]?["value"].toString() ?? "",
             bgm[currentBGMIndex]?["path"].toString() ?? "",
