@@ -252,20 +252,25 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
       addByBytes();
     } else if (path.isNotEmpty) {
       SmartDialog.showLoading();
-      var post = await add_novel_by_txt(
-          "from app",
-          path,
-          voice[currentVoiceIndex]?["value"].toString() ?? "",
-          bgm[currentBGMIndex]?["path"].toString() ?? "",
-          voice[currentVoiceIndex]?["id"].toString() ?? "",
-          bgm[currentBGMIndex]?["id"].toString() ?? "");
+      try {
+        var post = await add_novel_by_txt(
+            "from app",
+            path,
+            voice[currentVoiceIndex]?["value"].toString() ?? "",
+            bgm[currentBGMIndex]?["path"].toString() ?? "",
+            voice[currentVoiceIndex]?["id"].toString() ?? "",
+            bgm[currentBGMIndex]?["id"].toString() ?? "");
 
-      print(post.data);
-      SmartDialog.dismiss(status: SmartStatus.loading);
-      if (post.isSuccess()) {
-        SmartDialog.dismiss();
-      } else {
-        "创建失败".bbToast();
+        print(post.data);
+        if (post.isSuccess()) {
+          SmartDialog.dismiss();
+        } else {
+          "创建失败".bbToast();
+        }
+      } catch (e) {
+        print(e);
+      } finally {
+        SmartDialog.dismiss(status: SmartStatus.loading);
       }
     }
   }

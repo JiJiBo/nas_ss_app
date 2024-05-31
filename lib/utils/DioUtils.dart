@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:nas_ss_app/mf.dart';
 
@@ -11,7 +10,9 @@ String get url {
 }
 
 // const url = "http://192.168.1.10:28000";
-var dio = Dio();
+var dio = Dio()
+  ..options.connectTimeout = 150000
+  ..options.receiveTimeout = 150000;
 
 Future<String> getRoot() async {
   return Future.value(url);
