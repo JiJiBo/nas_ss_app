@@ -103,11 +103,13 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
                           if (kIsWeb) {
                             if (result != null && result.files.isNotEmpty) {
                               fileBytes = result.files.first.bytes;
-                              fileName = result.files.first.name;
+                              fileName = result?.files.first.name.substring(
+                                  0, result?.files.first.name.lastIndexOf("."));
                             }
                           } else {
                             path = result?.files.single.path ?? "";
-                            fileName = result?.files.first.name;
+                            fileName = result?.files.first.name.substring(
+                                0, result?.files.first.name.lastIndexOf("."));
                           }
                         } else {}
                         setState(() {});
