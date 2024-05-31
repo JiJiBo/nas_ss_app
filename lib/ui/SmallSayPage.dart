@@ -44,7 +44,12 @@ class _SmallSayPage extends State<SmallSayPage> {
                   alertEdit("输入书的链接,只能爬取qimao小说",
                       "https://www.qimao.com/shuku/", (v) {}, context);
                 },
-                icon: Icon(Icons.add))
+                icon: Icon(Icons.add)),
+            IconButton(
+                onPressed: () {
+                  alertEditTxt("选取文件", (v) {}, context);
+                },
+                icon: Icon(Icons.file_copy_sharp)),
           ],
         ),
         body: EasyRefresh(

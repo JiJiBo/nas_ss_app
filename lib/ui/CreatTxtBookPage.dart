@@ -11,20 +11,19 @@ import 'package:url_launcher/url_launcher.dart';
 import '../utils/AlertEdit.dart';
 import '../utils/DioUtils.dart';
 
-class CreatNewBookPage extends StatefulObserverWidget {
+class CreatNewBookTxtPage extends StatefulObserverWidget {
   String hint;
-  String msg;
   Function(String) call;
 
-  CreatNewBookPage(this.hint, this.msg, this.call);
+  CreatNewBookTxtPage(this.hint,  this.call);
 
   @override
-  _CreatNewBookPage createState() {
-    return _CreatNewBookPage();
+  _CreatNewBookTxtPage createState() {
+    return _CreatNewBookTxtPage();
   }
 }
 
-class _CreatNewBookPage extends State<CreatNewBookPage> {
+class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
   @override
   void initState() {
     super.initState();

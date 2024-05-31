@@ -4,6 +4,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../ui/CreatNewBookPage.dart';
+import '../ui/CreatTxtBookPage.dart';
 
 var noPaddingBS = ButtonStyle(
   padding: MaterialStateProperty.all(EdgeInsets.all(0)),
@@ -19,5 +20,14 @@ Future<void> alertEdit(String hint, String msg, Function(String) call,
       animationTime: Duration.zero,
       builder: (c) {
         return CreatNewBookPage(hint, msg, call);
+      });
+}
+
+Future<void> alertEditTxt(
+    String hint, Function(String) call, BuildContext context) async {
+  SmartDialog.show(
+      animationTime: Duration.zero,
+      builder: (c) {
+        return CreatNewBookTxtPage(hint, call);
       });
 }
