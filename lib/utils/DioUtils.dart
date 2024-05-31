@@ -1,3 +1,16 @@
+import 'dart:html';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:nas_ss_app/mf.dart';
+import 'package:nas_ss_app/utils/ExtUtils.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/AlertEdit.dart';
+import '../utils/DioUtils.dart';
 import 'package:dio/dio.dart';
 import 'package:nas_ss_app/mf.dart';
 
@@ -24,7 +37,6 @@ Future<Response<Map>> add_novel(String name, link, voice, background_music,
     "name": name,
     "voice": voice,
     "voice_id": voice_id,
-    "user_id": "id".getString(defaultValue: ""),
     "background_music": background_music,
     "background_music_id": background_music_id,
     "link": link
@@ -50,7 +62,6 @@ Future<Response<Map>> add_novel_by_txt(
     "name": name,
     "voice": voice,
     "voice_id": voiceId,
-    "user_id": "id".getString(defaultValue: ""),
     "background_music": backgroundMusic,
     "background_music_id": backgroundMusicId,
   };
@@ -70,6 +81,43 @@ Future<Response<Map>> add_novel_by_txt(
     options: Options(headers: {
       'Content-Type': 'multipart/form-data',
       // 更改Content-Type为multipart/form-data
+      "Authorization": "token".getString(defaultValue: "")
+    }),
+  );
+  return response;
+}
+
+Future<Response<Map>> add_novel_by_txtByBytes(
+    String name,
+    Uint8List? fileData,
+    String voice,
+    String backgroundMusic,
+    String voiceId,
+    String backgroundMusicId) async {
+  print("add_novel_by_txtKWeb in");
+  String path = await getRoot() + "/add_novel_by_txt";
+  print(path);
+  Map<String, dynamic> parameters = {
+    "name": name,
+    "voice": voice,
+    "voice_id": voiceId,
+    "background_music": backgroundMusic,
+    "background_music_id": backgroundMusicId,
+  };
+  print(parameters);
+  // 创建FormData
+  FormData formData = FormData.fromMap({
+    ...parameters,
+    // 文件参数, 假设字段名为'file', 你可以根据实际情况调整
+    "file": MultipartFile.fromBytes(fileData!, filename: name + ".txt")
+  });
+
+  print(parameters);
+  Response<Map> response = await dio.post(
+    path,
+    data: formData, // 使用FormData作为请求体
+    options: Options(headers: {
+      'Content-Type': 'multipart/form-data', // 这一行其实可以不写，Dio会自动处理
       "Authorization": "token".getString(defaultValue: "")
     }),
   );
@@ -124,7 +172,6 @@ Future<Response<Map>> get_all_novels(page) async {
   String path = await getRoot() + "/get_all_novels";
   Map<String, dynamic> parameters = {
     "page": page,
-    "user_id": "id".getString(defaultValue: "-1"),
   };
   print(path);
   Response<Map> query = await dio.get(
@@ -241,5 +288,8 @@ Future<Response<Map>> get_a_voice(voice_id) async {
   return query;
 }
 
-Options getOptions() =>
-    Options(headers: {"Authorization": "token".getString(defaultValue: "")});
+Options getOptions() {
+  var option =
+      Options(headers: {"Authorization": "token".getString(defaultValue: "")});
+  return option;
+}

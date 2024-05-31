@@ -45,7 +45,7 @@ class _WelcomePage extends State<WelcomePage> {
               isRepeatingAnimation: true,
               onTap: () {
                 Navigator.pop(context);
-                if ("id".getString(defaultValue: "").isNotEmpty) {
+                if ("token".getString(defaultValue: "").isNotEmpty) {
                   routeStore.home_ui_route.push(context);
                 } else {
                   routeStore.login_route.push(context);
@@ -60,7 +60,7 @@ class _WelcomePage extends State<WelcomePage> {
     Future.delayed(Duration(seconds: 6), () {
       if (mounted) {
         Navigator.pop(context);
-        if ("id".getString(defaultValue: "").isNotEmpty) {
+        if ("token".getString(defaultValue: "").isNotEmpty) {
           routeStore.home_ui_route.push(context);
         } else {
           routeStore.login_route.push(context);

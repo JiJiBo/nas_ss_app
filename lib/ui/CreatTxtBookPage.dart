@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -15,7 +16,7 @@ class CreatNewBookTxtPage extends StatefulObserverWidget {
   String hint;
   Function(String) call;
 
-  CreatNewBookTxtPage(this.hint,  this.call);
+  CreatNewBookTxtPage(this.hint, this.call);
 
   @override
   _CreatNewBookTxtPage createState() {
@@ -33,6 +34,9 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
   List voice = [];
   List bgm = [];
   String path = "";
+  String? fileName;
+
+  Uint8List? fileBytes;
 
   @override
   void dispose() {
@@ -91,14 +95,22 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
                     ),
                     Container(
                         child: ListTile(
-                      title: Text("文件"),
+                      title: Text(fileName ?? "文件"),
                       subtitle: Text(path),
                       onTap: () async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
+                        final result = await FilePicker.platform.pickFiles(
+                            type: FileType.any, allowMultiple: false);
 
                         if (result != null) {
-                          path = result.files.single.path!;
+                          if (kIsWeb) {
+                            if (result != null && result.files.isNotEmpty) {
+                              fileBytes = result.files.first.bytes;
+                              fileName = result.files.first.name;
+                            } else {
+                              path = result?.files.single.path ?? "";
+                              fileName = result?.files.first.name;
+                            }
+                          }
                         } else {}
                         setState(() {});
                       },
@@ -133,7 +145,6 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
                 ),
               ),
               Expanded(child: Container()),
-
               Container(
                   child: TextButton(
                       style: noPaddingBS,
@@ -153,23 +164,7 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
                         borderRadius: BorderRadius.all(Radius.circular(8))),
                     child: TextButton(
                         style: noPaddingBS,
-                        onPressed: () async {
-                          if (path.isNotEmpty) {
-                            var post = await add_novel_by_txt(
-                                "from app",
-                                path,
-                                voice[currentVoiceIndex]?["value"] ?? "",
-                                bgm[currentBGMIndex]?["path"] ?? "",
-                                voice[currentVoiceIndex]?["id"] ?? "",
-                                bgm[currentBGMIndex]?["id"] ?? "");
-                            print(post.data);
-                            if (post.isSuccess()) {
-                              SmartDialog.dismiss();
-                            } else {
-                              "创建失败".bbToast();
-                            }
-                          }
-                        },
+                        onPressed: confirm,
                         child: Text(
                           "Confirm",
                           style: TextStyle(color: Colors.white),
@@ -248,5 +243,48 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
     } else {}
 
     setState(() {});
+  }
+
+  Future<void> confirm() async {
+    if (kIsWeb) {
+      if (fileBytes == null) {
+        return;
+      }
+      print("add_novel_by_txtKWeb");
+      addByBytes();
+    } else if (path.isNotEmpty) {
+      var post = await add_novel_by_txt(
+          "from app",
+          path,
+          voice[currentVoiceIndex]?["value"] ?? "",
+          bgm[currentBGMIndex]?["path"] ?? "",
+          voice[currentVoiceIndex]?["id"] ?? "",
+          bgm[currentBGMIndex]?["id"] ?? "");
+      print(post.data);
+      if (post.isSuccess()) {
+        SmartDialog.dismiss();
+      } else {
+        "创建失败".bbToast();
+      }
+    }
+  }
+
+  Future<void> addByBytes() async {
+    print(voice[currentVoiceIndex]?["value"] ?? "");
+    print(bgm[currentBGMIndex]?["path"] ?? "");
+    print(voice[currentVoiceIndex]?["id"] ?? "");
+    print(bgm[currentBGMIndex]?["id"] ?? "");
+    var post = await add_novel_by_txtByBytes(
+        "from app",
+        fileBytes,
+        voice[currentVoiceIndex]?["value"] ?? "",
+        bgm[currentBGMIndex]?["path"] ?? "",
+        voice[currentVoiceIndex]?["id"] ?? "",
+        bgm[currentBGMIndex]?["id"] ?? "");
+    if (post.isSuccess()) {
+      SmartDialog.dismiss();
+    } else {
+      "创建失败".bbToast();
+    }
   }
 }
