@@ -57,20 +57,26 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
                   title: Text("BGM:${bgm["bgm"] ?? "--"}"),
                   subtitle: Text("人声:${voice["name"] ?? "--"}"),
                 ),
-                ListTile(
-                  title: Text("网页链接:${bookinfo["link"] ?? "--"}"),
-                  onTap: () async {
-                    final Uri _url = Uri.parse(bookinfo["link"]);
-                    if (!await launchUrl(_url)) {
-                      'Could not launch $_url'.bbToast();
-                    }
-                  },
-                ),
-                ListTile(
-                  title: Text("文本下载进度"),
-                  subtitle: Text(
-                      "${bookinfo["download_progress"] ?? 0}/${bookinfo["download_max"] ?? 0}"),
-                ),
+                Visibility(
+                    visible: isLink,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text("网页链接:${bookinfo["link"] ?? "--"}"),
+                          onTap: () async {
+                            final Uri _url = Uri.parse(bookinfo["link"]);
+                            if (!await launchUrl(_url)) {
+                              'Could not launch $_url'.bbToast();
+                            }
+                          },
+                        ),
+                        ListTile(
+                          title: Text("文本下载进度"),
+                          subtitle: Text(
+                              "${bookinfo["download_progress"] ?? 0}/${bookinfo["download_max"] ?? 0}"),
+                        ),
+                      ],
+                    )),
                 ListTile(
                   title: Text("解说进度"),
                   subtitle: Text(
