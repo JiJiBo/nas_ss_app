@@ -16,8 +16,6 @@ class _SettingPage extends State<SettingPage> {
   TextEditingController _filecontroller = TextEditingController();
   TextEditingController _fileport = TextEditingController();
   TextEditingController _port = TextEditingController();
-  TextEditingController _money = TextEditingController();
-  TextEditingController _homeMoney = TextEditingController();
   bool isv6 = false;
   bool isv6file = false;
 
@@ -30,8 +28,6 @@ class _SettingPage extends State<SettingPage> {
   @override
   void dispose() {
     _controller.dispose();
-    _money.dispose();
-    _homeMoney.dispose();
     _port.dispose();
     _filecontroller.dispose();
     _fileport.dispose();
@@ -73,37 +69,6 @@ class _SettingPage extends State<SettingPage> {
     );
   }
 
-  void moneySave() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('注意'),
-          content: Text('保存'),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                Navigator.of(context).pop();
-              },
-              child: Text('取消'),
-            ),
-            TextButton(
-              onPressed: () async {
-                int inputText = int.parse(_money.text);
-                // 在这里处理保存逻辑，例如打印输入内容
-                inputText.save("money");
-                "已保存".bbToast();
-                print("输入内容: $inputText");
-                Navigator.pop(context);
-              },
-              child: Text('更新'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void filePortSave() {
     showDialog(
       context: context,
@@ -120,7 +85,7 @@ class _SettingPage extends State<SettingPage> {
             ),
             TextButton(
               onPressed: () async {
-                String  inputText = _fileport.text;
+                String inputText = _fileport.text;
                 // 在这里处理保存逻辑，例如打印输入内容
                 inputText.save("filePort");
                 "已保存".bbToast();
@@ -185,40 +150,9 @@ class _SettingPage extends State<SettingPage> {
             ),
             TextButton(
               onPressed: () async {
-                String  inputText = _port.text;
+                String inputText = _port.text;
                 // 在这里处理保存逻辑，例如打印输入内容
                 inputText.save("port");
-                "已保存".bbToast();
-                print("输入内容: $inputText");
-                Navigator.pop(context);
-              },
-              child: Text('更新'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void saveHomeMoney() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('注意'),
-          content: Text('保存'),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                Navigator.of(context).pop();
-              },
-              child: Text('取消'),
-            ),
-            TextButton(
-              onPressed: () async {
-                int inputText = int.parse(_homeMoney.text);
-                // 在这里处理保存逻辑，例如打印输入内容
-                inputText.save("homeMoney");
                 "已保存".bbToast();
                 print("输入内容: $inputText");
                 Navigator.pop(context);
@@ -299,28 +233,6 @@ class _SettingPage extends State<SettingPage> {
                 onPressed: filePortSave,
                 child: Text("保存"),
               ),
-              TextField(
-                controller: _money,
-                decoration: InputDecoration(
-                  labelText: "输入每日饭钱",
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: moneySave,
-                child: Text("保存"),
-              ),
-              TextField(
-                controller: _homeMoney,
-                decoration: InputDecoration(
-                  labelText: "输入每月房租",
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: saveHomeMoney,
-                child: Text("保存"),
-              ),
             ],
           ),
         ));
@@ -342,9 +254,6 @@ class _SettingPage extends State<SettingPage> {
       _filecontroller.text =
           _filecontroller.text.substring(1, _filecontroller.text.length - 1);
     }
-    _money.text = "money".getInt(defaultValue: routeStore.money).toString();
-    _homeMoney.text =
-        "homeMoney".getInt(defaultValue: routeStore.homeMoney).toString();
     setState(() {});
   }
 }

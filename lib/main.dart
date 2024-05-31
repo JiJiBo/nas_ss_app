@@ -37,8 +37,6 @@ Future<void> initForFirst() async {
       "fileUrl".getString(defaultValue: "mf.file.nasneo.online");
   routeStore.port = "port".getString(defaultValue: "");
   routeStore.filePort = "filePort".getString(defaultValue: "7777");
-  routeStore.money = "money".getInt(defaultValue: 100);
-  routeStore.homeMoney = "homeMoney".getInt(defaultValue: 1100);
   await playManager.startListener();
 }
 

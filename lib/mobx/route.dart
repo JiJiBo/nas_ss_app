@@ -28,6 +28,4 @@ abstract class _route with Store {
   String fileUrl = "";
   String port = "";
   String filePort = "";
-  int money = 0;
-  int homeMoney = 0;
 }
