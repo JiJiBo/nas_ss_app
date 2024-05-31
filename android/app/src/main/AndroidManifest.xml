@@ -13,6 +13,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <!-- ALSO ADD THIS PERMISSION IF TARGETING SDK 34 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <meta-data
+        android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+        android:value="true" />
     <application
         android:label="nas_ss_app"
         android:name="${applicationName}"
@@ -70,5 +73,6 @@
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
+
     </application>
 </manifest>

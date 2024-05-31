@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -98,8 +96,7 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
                       title: Text(fileName ?? "文件"),
                       subtitle: Text(path),
                       onTap: () async {
-                        final result = await FilePicker.platform.pickFiles(
-                            type: FileType.any, allowMultiple: false);
+                        final result = await FilePicker.platform.pickFiles( );
 
                         if (result != null) {
                           if (kIsWeb) {
