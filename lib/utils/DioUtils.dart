@@ -113,7 +113,31 @@ Future<Response<Map>?> add_novel_by_txtByBytes(
     );
     return response;
   } catch (e) {
-    print(e);
+    if (e is DioError) {
+      // 根据不同类型的错误进行处理
+      switch (e.type) {
+        case DioErrorType.response:
+          print('Server error: ${e.response?.statusCode}');
+          break;
+        case DioErrorType.connectTimeout:
+          print('Connection timeout');
+          break;
+        case DioErrorType.sendTimeout:
+          print('Send timeout');
+          break;
+        case DioErrorType.receiveTimeout:
+          print('Receive timeout');
+          break;
+        case DioErrorType.cancel:
+          print('Request canceled');
+          break;
+        case DioErrorType.other:
+          print('Unexpected error: $e');
+          break;
+      }
+    } else {
+      print('Unexpected error: $e');
+    }
   }
   return null;
 }
