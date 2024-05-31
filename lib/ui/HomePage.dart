@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nas_ss_app/utils/ExtUtils.dart';
@@ -24,6 +26,7 @@ class _HomePage extends State<HomePage> {
 
   @override
   void dispose() {
+    eventListener?.cancel();
     super.dispose();
   }
 
@@ -39,10 +42,6 @@ class _HomePage extends State<HomePage> {
         child: Center(
           child: ListView(
             children: [
-
-
-
-
               ListTile(
                 title: Text("小说"),
                 leading: Image.asset(
@@ -92,5 +91,23 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  void initTheFirst() {}
+  bool isDown = false;
+  StreamSubscription<DownLine>? eventListener;
+
+  void initTheFirst() {
+    eventListener = eventBus.on<DownLine>().listen((event) {
+      if (isDown) {
+        return;
+      }
+      //双击检测
+      isDown = true;
+      try {
+        "".save("token");
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            routeStore.welcome_ui_route, (route) => false);
+      } catch (e) {}
+    });
+  }
 }
+
+class DownLine {}

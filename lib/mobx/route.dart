@@ -1,3 +1,4 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:mobx/mobx.dart';
 
 // This is our generated file (we'll see this soon!)
@@ -7,6 +8,7 @@ part 'route.g.dart';
 class route = _route with _$route;
 
 final routeStore = route();
+var eventBus = EventBus();
 
 // Our store class
 abstract class _route with Store {

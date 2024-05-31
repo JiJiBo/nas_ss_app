@@ -280,7 +280,7 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
     SmartDialog.showLoading();
     var post = await get_novel(bookid);
     if (post.isSuccess()) {
-      bookinfo = post.getData()["data"];
+      bookinfo = post.getData() ;
     } else {
       "获取失败".bbToast();
       setState(() {});

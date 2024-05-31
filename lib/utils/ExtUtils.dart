@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:nas_ss_app/ui/HomePage.dart';
 
 import '../mobx/route.dart';
 import 'DioUtils.dart';
@@ -23,7 +24,8 @@ extension StrExt on String {
   }
 
   String get toMp3File {
-    return "http://${routeStore.fileUrl}${routeStore.filePort.isEmpty ? "" : ":" + routeStore.filePort}/download?filename=" + this;
+    return "http://${routeStore.fileUrl}${routeStore.filePort.isEmpty ? "" : ":" + routeStore.filePort}/download?filename=" +
+        this;
   }
 
   Uint8List get toUint8List => this.toFile.readAsBytesSync();
@@ -44,6 +46,10 @@ extension BuildContextExt on BuildContext {
 extension ResponseExt on Response<Map> {
   bool isSuccess() {
     print(this.data);
+    if (this.data!["code"] == 401) {
+      eventBus.fire(DownLine());
+      return false;
+    }
     return this.data!["code"] == 200;
   }
 
