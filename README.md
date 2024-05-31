@@ -2,6 +2,7 @@
 
 # 注意
 
+
 - 这只是前端，后端请参考 python django 实现的 https://github.com/JiJiBo/nas_ss.git
 - 自行上传bgm文件，加在数据库里
 
@@ -12,7 +13,12 @@
 - 声音优美，可自定义，选择多
 - 支持上传txt或者通过链接，由后台爬取（只适配了七猫），更多功能，可以自己拓展
 - 支持用户系统，支持token认证，支持后台任务
-
+```agsl
+Flutter 3.16.0 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision db7ef5bf9f (7 months ago) • 2023-11-15 11:25:44 -0800
+Engine • revision 74d16627b9
+Tools • Dart 3.2.0 • DevTools 2.28.2
+```
 ## 截图
 
 ## 选取文件
