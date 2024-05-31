@@ -254,10 +254,10 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
       var post = await add_novel_by_txt(
           "from app",
           path,
-          voice[currentVoiceIndex]?["value"] ?? "",
-          bgm[currentBGMIndex]?["path"] ?? "",
-          voice[currentVoiceIndex]?["id"] ?? "",
-          bgm[currentBGMIndex]?["id"] ?? "");
+          voice[currentVoiceIndex]?["value"].toString() ?? "",
+          bgm[currentBGMIndex]?["path"].toString() ?? "",
+          voice[currentVoiceIndex]?["id"].toString() ?? "",
+          bgm[currentBGMIndex]?["id"].toString() ?? "");
       print(post.data);
       if (post.isSuccess()) {
         SmartDialog.dismiss();
@@ -268,17 +268,14 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
   }
 
   Future<void> addByBytes() async {
-    print(voice[currentVoiceIndex]?["value"] ?? "");
-    print(bgm[currentBGMIndex]?["path"] ?? "");
-    print(voice[currentVoiceIndex]?["id"] ?? "");
-    print(bgm[currentBGMIndex]?["id"] ?? "");
+
     var post = await add_novel_by_txtByBytes(
         "from app",
         fileBytes,
-        voice[currentVoiceIndex]?["value"] ?? "",
-        bgm[currentBGMIndex]?["path"] ?? "",
-        voice[currentVoiceIndex]?["id"] ?? "",
-        bgm[currentBGMIndex]?["id"] ?? "");
+        voice[currentVoiceIndex]?["value"].toString() ?? "",
+        bgm[currentBGMIndex]?["path"].toString() ?? "",
+        voice[currentVoiceIndex]?["id"].toString() ?? "",
+        bgm[currentBGMIndex]?["id"].toString() ?? "");
     if (post.isSuccess()) {
       SmartDialog.dismiss();
     } else {
