@@ -17,7 +17,7 @@ class _LoginPage extends State<LoginPage> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _register() async {
+  Future<void> _login() async {
     // 在这里编写注册逻辑，可以将用户名和密码发送到后端进行处理
     String username = _usernameController.text;
     String password = _passwordController.text;
@@ -67,7 +67,7 @@ class _LoginPage extends State<LoginPage> {
             ),
             SizedBox(height: 20.0),
             TextButton(
-              onPressed: _register,
+              onPressed: _login,
               child: Text('登录'),
             ),
             TextButton(

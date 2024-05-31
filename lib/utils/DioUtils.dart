@@ -16,7 +16,7 @@ Future<String> getRoot() async {
 
 Future<Response<Map>> add_novel(String name, link, voice, background_music,
     voice_id, background_music_id) async {
-  String path = await getRoot() + "/add_novel/";
+  String path = await getRoot() + "/add_novel";
   if (!link.endsWith("/")) {
     link = link + "/";
   }
@@ -33,7 +33,7 @@ Future<Response<Map>> add_novel(String name, link, voice, background_music,
   Response<Map> query = await dio.post(
     path,
     data: parameters,
-    options: Options(headers: {'Content-Type': 'application/json'}),
+    options: getOptions(),
   );
   return query;
 }
@@ -45,7 +45,7 @@ Future<Response<Map>> add_novel_by_txt(
     String backgroundMusic,
     String voiceId,
     String backgroundMusicId) async {
-  String path = await getRoot() + "/add_novel_by_txt/";
+  String path = await getRoot() + "/add_novel_by_txt";
   Map<String, dynamic> parameters = {
     "name": name,
     "voice": voice,
@@ -76,31 +76,31 @@ Future<Response<Map>> add_novel_by_txt(
 }
 
 Future<Response<Map>> login(String name, password) async {
-  String path = await getRoot() + "/login/";
+  String path = await getRoot() + "/login";
   Map<String, dynamic> parameters = {"name": name, "password": password};
   print(parameters);
   Response<Map> query = await dio.post(
     path,
     data: parameters,
-    options: Options(headers: {'Content-Type': 'application/json'}),
+    options: getOptions(),
   );
   return query;
 }
 
 Future<Response<Map>> register(String name, password) async {
-  String path = await getRoot() + "/register/";
+  String path = await getRoot() + "/register";
   Map<String, dynamic> parameters = {"name": name, "password": password};
   print(parameters);
   Response<Map> query = await dio.post(
     path,
     data: parameters,
-    options: Options(headers: {'Content-Type': 'application/json'}),
+    options: getOptions(),
   );
   return query;
 }
 
 Future<Response<Map>> get_all_voice() async {
-  String path = await getRoot() + "/get_all_voice/";
+  String path = await getRoot() + "/get_all_voice";
 
   Response<Map> query = await dio.get(
     path,
@@ -109,7 +109,7 @@ Future<Response<Map>> get_all_voice() async {
 }
 
 Future<Response<Map>> get_all_bgm() async {
-  String path = await getRoot() + "/get_all_bgm/";
+  String path = await getRoot() + "/get_all_bgm";
 
   Response<Map> query = await dio.get(
     path,
@@ -118,7 +118,7 @@ Future<Response<Map>> get_all_bgm() async {
 }
 
 Future<Response<Map>> get_all_novels(page) async {
-  String path = await getRoot() + "/get_all_novels/";
+  String path = await getRoot() + "/get_all_novels";
   Map<String, dynamic> parameters = {
     "page": page,
     "user_id": "id".getString(defaultValue: "-1"),
@@ -129,7 +129,7 @@ Future<Response<Map>> get_all_novels(page) async {
 }
 
 Future<Response<Map>> get_filtered_books(page, book_id, get_step) async {
-  String path = await getRoot() + "/get_filtered_books/";
+  String path = await getRoot() + "/get_filtered_books";
   Map<String, dynamic> parameters = {
     "page": page,
     "get_step": get_step,
@@ -140,7 +140,7 @@ Future<Response<Map>> get_filtered_books(page, book_id, get_step) async {
 }
 
 Future<Response<Map>> get_novel(novel_id) async {
-  String path = await getRoot() + "/get_novel/";
+  String path = await getRoot() + "/get_novel";
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
@@ -149,7 +149,7 @@ Future<Response<Map>> get_novel(novel_id) async {
 }
 
 Future<Response<Map>> update_novel(novel_id) async {
-  String path = await getRoot() + "/update_novel/";
+  String path = await getRoot() + "/update_novel";
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
@@ -158,7 +158,7 @@ Future<Response<Map>> update_novel(novel_id) async {
 }
 
 Future<Response<Map>> delete_novel(novel_id) async {
-  String path = await getRoot() + "/delete_novel/";
+  String path = await getRoot() + "/delete_novel";
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
@@ -167,7 +167,7 @@ Future<Response<Map>> delete_novel(novel_id) async {
 }
 
 Future<Response<Map>> stop_novel(novel_id) async {
-  String path = await getRoot() + "/stop_novel/";
+  String path = await getRoot() + "/stop_novel";
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
@@ -176,7 +176,7 @@ Future<Response<Map>> stop_novel(novel_id) async {
 }
 
 Future<Response<Map>> clear_novel(novel_id) async {
-  String path = await getRoot() + "/clear_novel/";
+  String path = await getRoot() + "/clear_novel";
   Map<String, dynamic> parameters = {
     "novel_id": novel_id,
   };
@@ -185,7 +185,7 @@ Future<Response<Map>> clear_novel(novel_id) async {
 }
 
 Future<Response<Map>> get_a_bgm(bgm_id) async {
-  String path = await getRoot() + "/get_a_bgm/";
+  String path = await getRoot() + "/get_a_bgm";
   Map<String, dynamic> parameters = {
     "bgm_id": bgm_id,
   };
@@ -194,10 +194,12 @@ Future<Response<Map>> get_a_bgm(bgm_id) async {
 }
 
 Future<Response<Map>> get_a_voice(voice_id) async {
-  String path = await getRoot() + "/get_a_voice/";
+  String path = await getRoot() + "/get_a_voice";
   Map<String, dynamic> parameters = {
     "voice_id": voice_id,
   };
   Response<Map> query = await dio.get(path, queryParameters: parameters);
   return query;
 }
+
+Options getOptions() => Options( );
