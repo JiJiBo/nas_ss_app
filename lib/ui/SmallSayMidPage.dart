@@ -85,7 +85,7 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
                   onTap: () {
                     routeStore.small_say_detail_route.push(context, args: {
                       "bookid": bookid,
-                      "get_step": 3,
+                      "get_step": 2,
                       "name": bookinfo["name"]
                     });
                   },
@@ -98,7 +98,7 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
                   onTap: () {
                     routeStore.small_say_detail_route.push(context, args: {
                       "bookid": bookid,
-                      "get_step": 6,
+                      "get_step": 5,
                       "name": bookinfo["name"]
                     });
                   },
