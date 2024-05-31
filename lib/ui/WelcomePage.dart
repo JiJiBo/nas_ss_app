@@ -37,7 +37,7 @@ class _WelcomePage extends State<WelcomePage> {
             ),
             child: AnimatedTextKit(
               animatedTexts: [
-                WavyAnimatedText('Nas Tools'),
+                WavyAnimatedText('Nas Ss App'),
                 FlickerAnimatedText(
                   'By Nas Neo',
                 ),
