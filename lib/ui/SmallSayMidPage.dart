@@ -277,7 +277,7 @@ class _SmallSayMidPage extends State<SmallSayMidPage> {
   var bookid = 0;
 
   bool get isLink {
-    return bookinfo["type"] ?? "" == "link";
+    return (bookinfo["type"] ?? "") == "link";
   }
 
   Future<void> initForFirst() async {
