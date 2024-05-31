@@ -251,6 +251,7 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
       print("add_novel_by_txtKWeb");
       addByBytes();
     } else if (path.isNotEmpty) {
+      SmartDialog.showLoading();
       var post = await add_novel_by_txt(
           "from app",
           path,
@@ -258,7 +259,9 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
           bgm[currentBGMIndex]?["path"].toString() ?? "",
           voice[currentVoiceIndex]?["id"].toString() ?? "",
           bgm[currentBGMIndex]?["id"].toString() ?? "");
+
       print(post.data);
+      SmartDialog.dismiss(status: SmartStatus.loading);
       if (post.isSuccess()) {
         SmartDialog.dismiss();
       } else {
@@ -268,7 +271,6 @@ class _CreatNewBookTxtPage extends State<CreatNewBookTxtPage> {
   }
 
   Future<void> addByBytes() async {
-
     var post = await add_novel_by_txtByBytes(
         "from app",
         fileBytes,
