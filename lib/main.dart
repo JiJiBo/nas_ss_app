@@ -32,7 +32,7 @@ Future<void> main() async {
 }
 
 Future<void> initForFirst() async {
-  routeStore.url = "ipv46".getString(defaultValue: "ss.nasneo.online");
+  routeStore.url = "ipv46".getString(defaultValue: "nasss.nasneo.online");
   routeStore.fileUrl =
       "fileUrl".getString(defaultValue: "mf.file.nasneo.online");
   routeStore.port = "port".getString(defaultValue: "");
