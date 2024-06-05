@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nas_ss_app/utils/ExtUtils.dart';
 
 import '../mf.dart';
+import '../mobx/play_manager.dart';
 import '../mobx/route.dart';
 import '../utils/PerUtils.dart';
 
@@ -101,6 +102,7 @@ class _HomePage extends State<HomePage> {
       }
       //双击检测
       isDown = true;
+      playManager.floating?.hideFloating();
       try {
         "".save("token");
         Navigator.of(context).pushNamedAndRemoveUntil(
