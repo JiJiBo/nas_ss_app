@@ -78,7 +78,7 @@ Future<Response<Map>> add_novel_by_txt(
   return response;
 }
 
-Future<Response<Map>> add_novel_by_txtByBytes(
+Future<Response<Map>?> add_novel_by_txtByBytes(
     String name,
     Uint8List? fileData,
     String voice,
@@ -100,19 +100,46 @@ Future<Response<Map>> add_novel_by_txtByBytes(
   FormData formData = FormData.fromMap({
     ...parameters,
     // 文件参数, 假设字段名为'file', 你可以根据实际情况调整
-    "file": MultipartFile.fromBytes(fileData!, filename: name + ".txt")
+    "novel_file": MultipartFile.fromBytes(fileData!, filename: name + ".txt")
   });
 
   print(parameters);
-  Response<Map> response = await dio.post(
-    path,
-    data: formData, // 使用FormData作为请求体
-    options: Options(headers: {
-      'Content-Type': 'multipart/form-data', // 这一行其实可以不写，Dio会自动处理
-      "Authorization": "token".getString(defaultValue: "")
-    }),
-  );
-  return response;
+  try {
+    Response<Map> response = await dio.post(
+      path,
+      data: formData, // 使用FormData作为请求体
+      options: Options(
+          headers: {"Authorization": "token".getString(defaultValue: "")}),
+    );
+    return response;
+  } catch (e) {
+    if (e is DioError) {
+      // 根据不同类型的错误进行处理
+      switch (e.type) {
+        case DioErrorType.response:
+          print('Server error: ${e.response?.statusCode}');
+          break;
+        case DioErrorType.connectTimeout:
+          print('Connection timeout');
+          break;
+        case DioErrorType.sendTimeout:
+          print('Send timeout');
+          break;
+        case DioErrorType.receiveTimeout:
+          print('Receive timeout');
+          break;
+        case DioErrorType.cancel:
+          print('Request canceled');
+          break;
+        case DioErrorType.other:
+          print('Unexpected error: $e');
+          break;
+      }
+    } else {
+      print('Unexpected error: $e');
+    }
+  }
+  return null;
 }
 
 Future<Response<Map>> login(String name, password) async {
