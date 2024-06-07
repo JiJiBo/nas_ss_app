@@ -43,6 +43,10 @@ abstract class _play_manager with Store {
     "".save("play_url");
     0.0.save("time");
     urls.clear();
+    name = "";
+    title = "";
+    currentSliderValue = 0.0;
+    maxSliderValue = 0.0;
     await dealData();
   }
 
