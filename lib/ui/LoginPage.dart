@@ -89,9 +89,10 @@ class _LoginPage extends State<LoginPage> {
     );
   }
 
-  void initForFirst() {
+  Future<void> initForFirst() async {
     _usernameController.text = "userName".getString(defaultValue: "");
     playManager.floating?.hideFloating();
+    await playManager.clear();
     setState(() {});
   }
 }

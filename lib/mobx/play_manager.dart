@@ -39,6 +39,13 @@ abstract class _play_manager with Store {
   List urls = [];
   int currentIndex = 0;
 
+  Future<void> clear() async {
+    "".save("play_url");
+    0.0.save("time");
+    urls.clear();
+    await dealData();
+  }
+
   @action
   Future<void> startListener() async {
     var time = "time".getDouble(defaultValue: 0.0);
