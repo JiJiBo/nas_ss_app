@@ -22,6 +22,7 @@ class _PlayPage extends State<PlayPage> {
 
   @override
   void dispose() {
+    playManager.floating?.showFloating();
     super.dispose();
   }
 
@@ -36,6 +37,7 @@ class _PlayPage extends State<PlayPage> {
 
   Future<void> initForFirst() async {
     await Duration.zero.delayed();
+    playManager.floating?.hideFloating();
     setState(() {});
   }
 }
