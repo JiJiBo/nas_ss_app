@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nas_ss_app/mf.dart';
 import 'package:nas_ss_app/utils/ExtUtils.dart';
 
+import '../mobx/play_manager.dart';
 import '../mobx/route.dart';
 import '../utils/DioUtils.dart';
 
@@ -90,6 +91,7 @@ class _LoginPage extends State<LoginPage> {
 
   void initForFirst() {
     _usernameController.text = "userName".getString(defaultValue: "");
+    playManager.floating?.hideFloating();
     setState(() {});
   }
 }
