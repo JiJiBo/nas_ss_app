@@ -89,26 +89,36 @@ class _CreatNewBookPage extends State<CreatNewBookPage> {
                       height: 8,
                     ),
                     Container(
-                      child: TextField(
-                        controller: _controller,
-                        maxLines: 10,
-                        minLines: 1,
-                        style: TextStyle(fontSize: 15.0, color: Colors.black),
-                        decoration: InputDecoration(
-                          // 设置输入框的提示文本
-                          hintText: widget.hint,
-                          hintStyle: TextStyle(
-                              fontSize: 15.0, color: Color(0xFFDBDBDB)),
-                          // 设置输入框的边框样式
-                          border: OutlineInputBorder(
+                        child: Stack(
+                      alignment: Alignment.centerRight,
+                      children: [
+                        TextField(
+                          controller: _controller,
+                          maxLines: 10,
+                          minLines: 1,
+                          style: TextStyle(fontSize: 15.0, color: Colors.black),
+                          decoration: InputDecoration(
+                            hintText: widget.hint,
+                            hintStyle: TextStyle(
+                                fontSize: 15.0, color: Color(0xFFDBDBDB)),
+                            border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide.none),
-                          // 设置输入框的填充颜色
-                          filled: true,
-                          fillColor: Color(0xFFFEFEFF),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Color(0xFFFEFEFF),
+                          ),
                         ),
-                      ),
-                    ),
+                        _controller.text.isNotEmpty
+                            ? IconButton(
+                                icon: Icon(Icons.clear, color: Colors.grey),
+                                onPressed: () {
+                                  _controller.clear();
+                                },
+                              )
+                            : Container(), // 如果输入框为空则不显示清空按钮
+                      ],
+                    )),
                   ],
                 ),
               ),
@@ -257,9 +267,7 @@ class _CreatNewBookPage extends State<CreatNewBookPage> {
     var v = await get_all_voice();
     if (v.isSuccess()) {
       voice.addAll(v.getData()["results"]);
-    } else {
-
-    }
+    } else {}
     var b = await get_all_bgm();
     if (b.isSuccess()) {
       bgm.addAll(b.getData()["results"]);
