@@ -75,5 +75,7 @@
         <key>NSDocumentsFolderUsageDescription</key>
         <string>需要访问文档来打开和保存文件</string>
 
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>
