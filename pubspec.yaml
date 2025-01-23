@@ -55,7 +55,7 @@ dependencies:
   image_picker: ^0.8.5+3
   audio_session: ^0.1.23
   easy_refresh: ^3.3.5+1
-  file_picker: ^8.0.0+1
+  file_picker: ^8.1.7
 dependency_overrides:
   audio_service: ^0.18.16
 dev_dependencies:
