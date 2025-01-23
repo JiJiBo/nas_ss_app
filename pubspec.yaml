@@ -48,14 +48,16 @@ dependencies:
   draggable_scrollbar: ^0.1.0
   flutter_smart_dialog: ^4.9.5+1
   animated_text_kit: ^4.2.2
-  just_audio: 0.9.36
-  just_audio_background: ^0.0.1-beta.12
+  just_audio: ^0.9.43
+  just_audio_background: ^0.0.1-beta.14
   image: ^4.0.15
   rxdart: ^0.27.7
   image_picker: ^0.8.5+3
-  audio_session: ^0.1.19
+  audio_session: ^0.1.23
   easy_refresh: ^3.3.5+1
   file_picker: ^8.0.0+1
+dependency_overrides:
+  audio_service: ^0.18.16
 dev_dependencies:
   flutter_test:
     sdk: flutter
