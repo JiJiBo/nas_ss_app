@@ -52,11 +52,17 @@ android {
     }
 
     signingConfigs {
+        debug {
+            storeFile file('/Users/nas/gs/jks/nas.jks')
+            storePassword '159357bbb'
+            keyAlias 'nas'
+            keyPassword '159357bbb'
+        }
         release {
-            keyAlias 'NBonetouch'
-            keyPassword '12345678'
-            storeFile file('/Users/nas/FlutterProjects/yw/mecall_flutter/mecall_flutter/nbiot.jks')
-            storePassword '12345678'
+            storeFile file('/Users/nas/gs/jks/nas.jks')
+            storePassword '159357bbb'
+            keyAlias 'nas'
+            keyPassword '159357bbb'
         }
     }
     buildTypes {
